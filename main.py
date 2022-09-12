@@ -35,6 +35,8 @@ class Game:
 		pygame.time.set_timer(self.obstacle_timer,1400)
 		self.bonus_timer = pygame.USEREVENT + 2
 		pygame.time.set_timer(self.bonus_timer,8400)
+		self.music_timer = pygame.USEREVENT + 3
+		pygame.time.set_timer(self.music_timer, 11300)
 		
 		# text
 		self.font = pygame.font.Font('graphics/font/BD_Cartoon_Shout.ttf',30)
@@ -130,8 +132,10 @@ class Game:
 
 				if event.type == self.obstacle_timer and self.active:
 					self.obstacle = Obstacle([self.all_sprites,self.collision_sprites],self.scale_factor * 1.2)
-				elif event.type == self.bonus_timer and self.active:	
+				if event.type == self.bonus_timer and self.active:	
 					self.bonus = Bonus([self.all_sprites,self.collision_sprites],self.scale_factor * 0.6)
+				if event.type == self.music_timer:
+					self.music.play()
 			
 			# game logic
 			self.display_surface.fill('black')
