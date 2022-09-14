@@ -59,9 +59,10 @@ class Game:
 				if sprite.sprite_type == 'bonus':
 					sprite.kill()
 					self.start_offset -= 10000
-					return 0
+					return
 				if sprite.sprite_type == 'obstacle':
 					sprite.kill()
+					break
 			self.active = False
 			self.plane.kill()
 
