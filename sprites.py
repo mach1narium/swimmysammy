@@ -79,7 +79,7 @@ class Plane(pygame.sprite.Sprite):
 		self.frames = []
 		for i in range(1):
 			#surf = pygame.image.load(f'/Users/przenio/python/flappysammy/graphics/plane/red{i}.png').convert_alpha()
-			surf = pygame.image.load(f'graphics/plane/sammy_zombie.png').convert.alpha()
+			surf = pygame.image.load(f'graphics/plane/sammy_zombie.png').convert_alpha()
 			scaled_surface = pygame.transform.scale(surf,pygame.math.Vector2(surf.get_size())* scale_factor)
 			self.frames.append(scaled_surface)
 
