@@ -49,6 +49,7 @@ class Game:
 		
 		#music
 		pygame.mixer.music.load('sounds/music.ogg')
+		pygame.mixer.music.set_volume(0.1)
 		pygame.mixer.music.play(loops=-1)
 
 	def collisions(self):
