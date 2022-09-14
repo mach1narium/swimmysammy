@@ -73,7 +73,7 @@ class Plane(pygame.sprite.Sprite):
 
 		# sound
 		self.jump_sound = pygame.mixer.Sound('sounds/jump.ogg')
-		self.jump_sound.set_volume(0.1)
+		self.jump_sound.set_volume(0.2)
 
 	def import_frames(self,scale_factor):
 		self.frames = []
