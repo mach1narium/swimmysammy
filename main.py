@@ -55,12 +55,12 @@ class Game:
 		if pygame.sprite.spritecollide(self.plane,self.collision_sprites,False,pygame.sprite.collide_mask)\
 		or self.plane.rect.top <= 0:
 			for sprite in self.collision_sprites.sprites():
-				if sprite.sprite_type == 'obstacle':
-					sprite.kill()
-				elif sprite.sprite_type == 'bonus':
+				if sprite.sprite_type == 'bonus':
 					sprite.kill()
 					self.start_offset -= 10000
-					return
+					return 0
+				elif sprite.sprite_type == 'obstacle':
+					sprite.kill()
 			self.active = False
 			self.plane.kill()
 
