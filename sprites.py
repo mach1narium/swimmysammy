@@ -99,19 +99,7 @@ class Plane(pygame.sprite.Sprite):
 		self.frame_index += 10 * dt
 		if self.frame_index >= len(self.frames):
 			self.frame_index = 0
-		self.image = self.frames[int(self.frame_index)]
-
-	"""def swim_bubble_animation(self):
-		self.bubble_frame_index += self.bubble_animation_speed
-		if self.bubble_frame_index >= len(self.bubble_swim_particles):
-			self.bubble_frame_index = 0
-
-		bubble_particle = self.bubble_swim_particles[int(self.bubble_frame_index)]
-
-		if self.jump():
-			pos = self.rect.bottomleft
-			self.display_surface.blit(bubble_particle,pos)
-			"""
+		self.image = self.frames[int(self.frame_index)]			
 
 	def rotate(self):
 		rotated_plane = pygame.transform.rotozoom(self.image,-self.direction * 0.06,1)
@@ -161,7 +149,7 @@ class Bonus(pygame.sprite.Sprite):
 		surf = pygame.image.load(f'graphics/bonus/bonus.png').convert_alpha()
 		self.image = pygame.transform.scale(surf,pygame.math.Vector2(surf.get_size()) * scale_factor)
 		
-		x = WINDOW_WIDTH + randint(40,100)
+		x = WINDOW_WIDTH + randint(67,127)
 
 		y = WINDOW_HEIGHT - randint(250,650)
 		self.rect = self.image.get_rect(midtop = (x,y))
