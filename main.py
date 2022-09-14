@@ -60,7 +60,7 @@ class Game:
 					sprite.kill()
 					self.start_offset -= 10000
 					return 0
-				elif sprite.sprite_type == 'obstacle':
+				if sprite.sprite_type == 'obstacle':
 					sprite.kill()
 			self.active = False
 			self.plane.kill()
@@ -128,10 +128,10 @@ class Game:
 						self.active = True
 						self.start_offset = pygame.time.get_ticks()
 
-				if event.type == self.obstacle_timer and self.active:
-					self.obstacle = Obstacle([self.all_sprites,self.collision_sprites],self.scale_factor * 1.2)
 				if event.type == self.bonus_timer and self.active:	
 					self.bonus = Bonus([self.all_sprites,self.collision_sprites],self.scale_factor * 0.6)
+				if event.type == self.obstacle_timer and self.active:
+					self.obstacle = Obstacle([self.all_sprites,self.collision_sprites],self.scale_factor * 1.2)
 			
 			
 			# game logic
