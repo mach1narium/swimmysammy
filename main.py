@@ -49,7 +49,7 @@ class Game:
 		
 		#music
 		pygame.mixer.music.load('sounds/music.ogg')
-		pygame.mixer.music.play(-1)
+		pygame.mixer.music.play(loops=-1)
 
 	def collisions(self):
 		if pygame.sprite.spritecollide(self.plane,self.collision_sprites,False,pygame.sprite.collide_mask)\
