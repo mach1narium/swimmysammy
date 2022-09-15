@@ -123,10 +123,10 @@ class Obstacle(pygame.sprite.Sprite):
 		x = WINDOW_WIDTH + randint(108,168)
 
 		if orientation == 'up':
-			y = WINDOW_HEIGHT + randint(10,50)
+			y = WINDOW_HEIGHT + randint(20,50)
 			self.rect = self.image.get_rect(midbottom = (x,y))
 		else:
-			y = randint(-50,-10)
+			y = randint(-50,-20)
 			self.image = pygame.transform.flip(self.image,False,True)
 			self.rect = self.image.get_rect(midtop = (x,y))
 
