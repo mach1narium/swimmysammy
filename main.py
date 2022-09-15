@@ -62,7 +62,7 @@ class Game:
 					return
 				if sprite.sprite_type == 'obstacle':
 					sprite.kill()
-					break
+					
 			self.active = False
 			self.plane.kill()
 
@@ -151,7 +151,7 @@ class Game:
 				self.display_surface.blit(self.menu_surf,self.menu_rect)
 
 			pygame.display.update()
-			#self.clock.tick(FRAMERATE)
+			self.clock.tick(FRAMERATE)
 			await asyncio.sleep(0)
 
 if __name__ == '__main__':
