@@ -102,7 +102,7 @@ class Game:
 		high_score_rect = high_score_surf.get_rect(midtop = (WINDOW_WIDTH / 2 ,y))
 		self.display_surface.blit(high_score_surf,high_score_rect)
 
-	def display_fps(self,dt):
+	def display_fps(self):
 		self.ver = "alpha build"
 		y = WINDOW_HEIGHT / 50
 
