@@ -38,6 +38,7 @@ class Game:
 		
 		# text
 		self.font = pygame.font.Font('graphics/font/BD_Cartoon_Shout.ttf',30)
+		self.font_small = pygame.font.Font('graphics/font/BD_Cartoon_Shout.ttf',10)
 		self.load_high_score()
 		self.score = 0
 		self.fps = 0
@@ -51,12 +52,16 @@ class Game:
 		pygame.mixer.music.load('sounds/music.ogg')
 		pygame.mixer.music.set_volume(0.1)
 		pygame.mixer.music.play(loops=-1)
+		#sound
+		self.slurp_sound = pygame.mixer.Sound('sounds/slurp.ogg')
+		self.slurp_sound.set_volume(0.7)
 
 	def collisions(self):
 		if pygame.sprite.spritecollide(self.plane,self.collision_sprites,False,pygame.sprite.collide_mask)\
 		or self.plane.rect.top <= 0:
 			for sprite in self.collision_sprites.sprites():
 				if sprite.sprite_type == 'bonus':
+					self.slurp_sound.play()
 					sprite.kill()
 					self.start_offset -= 10000
 					return
@@ -97,11 +102,11 @@ class Game:
 		high_score_rect = high_score_surf.get_rect(midtop = (WINDOW_WIDTH / 2 ,y))
 		self.display_surface.blit(high_score_surf,high_score_rect)
 
-	def display_fps(self):
-		self.fps = (self.clock.get_fps())
-		y = WINDOW_HEIGHT / 60
+	def display_fps(self,dt):
+		self.ver = "alpha build"
+		y = WINDOW_HEIGHT / 50
 
-		fps_surf = self.font.render(str(round(self.fps)),True,'black')
+		fps_surf = self.font_small.render(str(self.ver),True,'grey')
 		fps_rect = fps_surf.get_rect(topright = (WINDOW_WIDTH ,y))
 		self.display_surface.blit(fps_surf,fps_rect)
 
