@@ -146,7 +146,7 @@ class Game:
 			self.all_sprites.draw(self.display_surface)
 			self.display_high_score()
 			self.display_score()
-			#self.display_fps()
+			self.display_fps()
 			#print(self.clock.get_fps())
 			#print(pygame.time.get_ticks() - self.start_offset)
 
