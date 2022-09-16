@@ -106,7 +106,7 @@ class Game:
 		self.ver = "alpha build"
 		y = WINDOW_HEIGHT / 50
 
-		fps_surf = self.font_small.render(str(self.ver),True,'grey')
+		fps_surf = self.font_small.render(self.ver,True,'grey')
 		fps_rect = fps_surf.get_rect(topright = (WINDOW_WIDTH ,y))
 		self.display_surface.blit(fps_surf,fps_rect)
 
