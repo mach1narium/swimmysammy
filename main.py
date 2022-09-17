@@ -16,6 +16,7 @@ class Game:
 		# sprite groups
 		self.all_sprites = pygame.sprite.Group()
 		self.collision_sprites = pygame.sprite.Group()
+		self.bonus_sprites = pygame.sprite.Group()
 		self.particles = pygame.sprite.Group()
 
 		# scale factor
