@@ -54,7 +54,7 @@ class Game:
 		pygame.mixer.music.play(loops=-1)
 		#sound
 		self.slurp_sound = pygame.mixer.Sound('sounds/slurp.ogg')
-		self.slurp_sound.set_volume(1.0)
+		self.slurp_sound.set_volume(1.4)
 
 	def collisions(self):
 		if pygame.sprite.spritecollide(self.plane,self.collision_sprites,False,pygame.sprite.collide_mask)\
@@ -140,7 +140,7 @@ class Game:
 						self.start_offset = pygame.time.get_ticks()
 
 				if event.type == self.bonus_timer and self.active:	
-					self.bonus = Bonus([self.all_sprites,self.collision_sprites],self.scale_factor * 0.6)
+					self.bonus = Bonus([self.all_sprites,self.bonus_sprites],self.scale_factor * 0.6)
 				if event.type == self.obstacle_timer and self.active:
 					self.obstacle = Obstacle([self.all_sprites,self.collision_sprites],self.scale_factor * 1.2)
 			
