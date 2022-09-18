@@ -9,7 +9,7 @@ class Game:
 		# setup
 		pygame.init()
 		self.display_surface = pygame.display.set_mode((WINDOW_WIDTH,WINDOW_HEIGHT))
-		pygame.display.set_caption('Flappy Sammy')
+		pygame.display.set_caption('Swimmy Sammy')
 		self.clock = pygame.time.Clock()
 		self.active = False
 
