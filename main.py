@@ -55,7 +55,7 @@ class Game:
 		pygame.mixer.music.play(loops=-1)
 		#sound
 		self.slurp_sound = pygame.mixer.Sound('sounds/slurp.ogg')
-		self.slurp_sound.set_volume(1.4)
+		self.slurp_sound.set_volume(1.9)
 
 	def collisions(self):
 		if pygame.sprite.spritecollide(self.plane,self.collision_sprites,False,pygame.sprite.collide_mask)\
