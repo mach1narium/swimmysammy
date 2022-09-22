@@ -154,7 +154,7 @@ class Game:
 			self.display_surface.fill('black')
 			self.all_sprites.update(dt)
 			self.all_sprites.draw(self.display_surface)
-			self.particle.emit()
+			self.particle.emit(dt)
 			self.display_high_score()
 			self.display_score()
 			self.display_fps()
