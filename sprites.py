@@ -184,7 +184,7 @@ class ParticleBubble(pygame.sprite.Sprite):
 		self.display_surface = surface
 
 	def update(self,dt):
-		self.pos.x -= 250 * dt
+		self.pos.x -= 360 * dt
 		self.rect.x = round(self.pos.x)
 		if self.rect.right <= -50:
 			self.kill()
@@ -194,16 +194,16 @@ class ParticleBubble(pygame.sprite.Sprite):
 		if self.particles:
 			self.delete_particles()
 			for particle in self.particles:
-				particle[0][0] -= 450 * dt
+				particle[0][0] -= 360 * dt
 				particle[0][1] -= particle[2][1]
-				particle[1] -= 0.05
+				particle[1] -= 0.08
 				#particle[3] -= 0.2
 				pygame.draw.circle(self.display_surface,pygame.Color('lightseagreen'),particle[0], int(particle[1]))
 
 	def add_particles(self):
 		# adds particles
-		pos_x = WINDOW_WIDTH - randint(1,20)
-		pos_y = WINDOW_HEIGHT - randint(100,450)
+		pos_x = WINDOW_WIDTH - randint(1,400)
+		pos_y = WINDOW_HEIGHT - randint(100,200)
 		radius = 7
 		direction_x = randint(3,5)
 		direction_y = randint(1,1)
