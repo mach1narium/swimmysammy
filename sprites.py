@@ -202,7 +202,7 @@ class ParticleBubble(pygame.sprite.Sprite):
 
 	def add_particles(self):
 		# adds particles
-		pos_x = WINDOW_WIDTH - randint(1,200)
+		pos_x = WINDOW_WIDTH - randint(1,20)
 		pos_y = WINDOW_HEIGHT - randint(100,450)
 		radius = 7
 		direction_x = randint(3,5)
