@@ -177,18 +177,11 @@ class Bonus(pygame.sprite.Sprite):
 
 
 class ParticleBubble(pygame.sprite.Sprite):
-	def __init__(self,groups,scale_factor):
-		super().__init__(groups)
+	def __init__(self,surface):
+		super().__init__()
 
-		surf = pygame.image.load(f'graphics/bubbles/bubble1.png').convert_alpha()
-		self.image = pygame.transform.scale(surf,pygame.math.Vector2(surf.get_size()) * scale_factor)
-
-		self.rect = self.image.get_rect(midleft = (WINDOW_WIDTH / 9,WINDOW_HEIGHT / 2))
-		self.pos = pygame.math.Vector2(self.rect.topleft)
-		
-		# mask
-		self.mask = pygame.mask.from_surface(self.image)
-
+		self.particles = []
+		self.display_surface = surface
 
 	def update(self,dt):
 		self.pos.x -= 250 * dt
@@ -196,28 +189,28 @@ class ParticleBubble(pygame.sprite.Sprite):
 		if self.rect.right <= -50:
 			self.kill()
 
-		def emit(self):
-			# moves and draws the particles
-			if self.particles:
-				self.delete_particles()
-				for particle in self.particles:
-					particle[0].x -= 1
-					#particle[0].y += particle[2]
-					#particle[3] -= 0.2
-					pygame.blit(self.surface,particle[1],particle[0])
+	def emit(self):
+		# moves and draws the particles
+		if self.particles:
+			self.delete_particles()
+			for particle in self.particles:
+				particle[0][0] += particle[2][0]
+				particle[0][1] += particle[2][1]
+				particle[1] -= 0.04
+				#particle[3] -= 0.2
+				pygame.draw.circle(self.display_surface,pygame.Color('lightseagreen'),particle[0], int(particle[1]))
 
-		def add_particles(self):
-			# adds particles
-			pos_x = 250
-			pos_y = 250
-			direction_x = randint(-3,3)
-			direction_y = randint(-3,3)
-			lifetime = randint(4,10)
-			particle_rect = pygame.Rect(pos_x,pos_y,self.width,self.height)
-			self.particles.append([particle_rect,direction_x,direction_y,lifetime])
+	def add_particles(self):
+		# adds particles
+		pos_x = WINDOW_WIDTH - randint(1,280)
+		pos_y = WINDOW_HEIGHT - randint(100,450)
+		radius = 7
+		direction_x = randint(-5,-4)
+		direction_y = randint(-2,-1)
+		particle_circle = [[pos_x,pos_y],radius,[direction_x,direction_y]]
+		self.particles.append(particle_circle)
 
-		def delete_particles(self):
-			# deletes particles after a certain time
-			particle_copy = [particle for particle in self.particles if particle[0].x > 0]
-			self.particles = particle_copy
-			
+	def delete_particles(self):
+		# deletes particles after a certain time
+		particle_copy = [particle for particle in self.particles if particle[1] > 0]
+		self.particles = particle_copy
