@@ -37,7 +37,7 @@ class Game:
 		self.bonus_timer = pygame.USEREVENT + 2
 		pygame.time.set_timer(self.bonus_timer,8400)
 		self.particle_timer = pygame.USEREVENT + 3
-		pygame.time.set_timer(self.particle_timer,600)
+		pygame.time.set_timer(self.particle_timer,400)
 		
 		# text
 		self.font = pygame.font.Font('graphics/font/BD_Cartoon_Shout.ttf',30)
