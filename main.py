@@ -17,7 +17,7 @@ class Game:
 		self.all_sprites = pygame.sprite.Group()
 		self.collision_sprites = pygame.sprite.Group()
 		self.bonus_sprites = pygame.sprite.Group()
-		self.particles = pygame.sprite.Group()
+		#self.particles = pygame.sprite.Group()
 
 		# scale factor
 		#bg_height = pygame.image.load('/Users/przenio/python/flappysammy/graphics/environment/background.png').get_height()
@@ -29,13 +29,15 @@ class Game:
 		BG(self.all_sprites,self.scale_factor)
 		Ground([self.all_sprites,self.collision_sprites],self.scale_factor)
 		self.plane = Plane(self.all_sprites,self.scale_factor / 12.0)
-		#self.bubble = ParticleBubble(self.all_sprites,self.scale_factor / 3.5)
+		self.particle = ParticleBubble(self.display_surface)
 
 		# timer
 		self.obstacle_timer = pygame.USEREVENT + 1
 		pygame.time.set_timer(self.obstacle_timer,1400)
 		self.bonus_timer = pygame.USEREVENT + 2
 		pygame.time.set_timer(self.bonus_timer,8400)
+		self.particle_timer = pygame.USEREVENT + 3
+		pygame.time.set_timer(self.particle_timer,600)
 		
 		# text
 		self.font = pygame.font.Font('graphics/font/BD_Cartoon_Shout.ttf',30)
@@ -144,12 +146,15 @@ class Game:
 					self.bonus = Bonus([self.all_sprites,self.bonus_sprites],self.scale_factor * 0.6)
 				if event.type == self.obstacle_timer and self.active:
 					self.obstacle = Obstacle([self.all_sprites,self.collision_sprites],self.scale_factor * 1.2)
+				if event.type == self.particle_timer:
+					self.particle.add_particles()
 			
 			
 			# game logic
 			self.display_surface.fill('black')
 			self.all_sprites.update(dt)
 			self.all_sprites.draw(self.display_surface)
+			self.particle.emit()
 			self.display_high_score()
 			self.display_score()
 			self.display_fps()
