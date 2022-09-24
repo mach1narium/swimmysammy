@@ -198,7 +198,7 @@ class ParticleBubble(pygame.sprite.Sprite):
 				particle[0][1] -= particle[2][1]
 				particle[1] -= 0.08
 				#particle[3] -= 0.2
-				pygame.draw.circle(self.display_surface,pygame.Color('lightseagreen'),particle[0], int(particle[1]))
+				pygame.draw.circle(self.display_surface,pygame.Color('lightseagreen'),particle[0], int(particle[1]),2)
 
 	def add_particles(self):
 		# adds particles
@@ -215,7 +215,7 @@ class ParticleBubble(pygame.sprite.Sprite):
 		pos_y = ppos_y + 35
 		radius = 5
 		direction_x = randint(-1,1)
-		direction_y = randint(-7,7)
+		direction_y = randint(-5,5)
 		particle_circle = [[pos_x,pos_y],radius,[direction_x,direction_y]]
 		self.particles.append(particle_circle)
 
