@@ -30,6 +30,7 @@ class Game:
 		Ground([self.all_sprites,self.collision_sprites],self.scale_factor)
 		self.plane = Plane(self.all_sprites,self.scale_factor / 12.0)
 		self.particle = ParticleBubble(self.display_surface)
+		self.particle_sammy = ParticleBubble(self.display_surface)
 
 		# timer
 		self.obstacle_timer = pygame.USEREVENT + 1
@@ -37,7 +38,9 @@ class Game:
 		self.bonus_timer = pygame.USEREVENT + 2
 		pygame.time.set_timer(self.bonus_timer,8400)
 		self.particle_timer = pygame.USEREVENT + 3
-		pygame.time.set_timer(self.particle_timer,400)
+		pygame.time.set_timer(self.particle_timer,256)
+		self.particle_sammy_timer = pygame.USEREVENT + 4
+		pygame.time.set_timer(self.particle_sammy_timer,32)
 		
 		# text
 		self.font = pygame.font.Font('graphics/font/BD_Cartoon_Shout.ttf',30)
@@ -148,6 +151,8 @@ class Game:
 					self.obstacle = Obstacle([self.all_sprites,self.collision_sprites],self.scale_factor * 1.2)
 				if event.type == self.particle_timer:
 					self.particle.add_particles()
+				if event.type == self.particle_sammy_timer and self.active:
+					self.particle_sammy.add_jump_particles(int(self.plane.pos.y))
 			
 			
 			# game logic
@@ -164,6 +169,7 @@ class Game:
 			if self.active: 
 				self.collisions()
 				self.collisions_bonus()
+				self.particle_sammy.emit(dt)
 			else:
 				self.display_surface.blit(self.menu_surf,self.menu_rect)
 
