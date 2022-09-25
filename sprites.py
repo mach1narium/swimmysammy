@@ -183,12 +183,6 @@ class ParticleBubble(pygame.sprite.Sprite):
 		self.particles = []
 		self.display_surface = surface
 
-	def update(self,dt):
-		self.pos.x -= 360 * dt
-		self.rect.x = round(self.pos.x)
-		if self.rect.right <= -50:
-			self.kill()
-
 	def emit(self,dt):
 		# moves and draws the particles
 		if self.particles:
@@ -215,7 +209,7 @@ class ParticleBubble(pygame.sprite.Sprite):
 		pos_y = ppos_y + 35
 		radius = 5
 		direction_x = randint(-1,1)
-		direction_y = randint(-3,3)
+		direction_y = 10
 		particle_circle = [[pos_x,pos_y],radius,[direction_x,direction_y]]
 		self.particles.append(particle_circle)
 
