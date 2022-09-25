@@ -215,7 +215,7 @@ class ParticleBubble(pygame.sprite.Sprite):
 		pos_y = ppos_y + 35
 		radius = 5
 		direction_x = randint(-1,1)
-		direction_y = randint(-7,7)
+		direction_y = randint(-1,7)
 		particle_circle = [[pos_x,pos_y],radius,[direction_x,direction_y]]
 		self.particles.append(particle_circle)
 
