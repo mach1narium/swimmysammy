@@ -78,13 +78,9 @@ class Plane(pygame.sprite.Sprite):
 	def import_frames(self,scale_factor):
 		self.frames = []
 		for i in range(1):
-			#surf = pygame.image.load(f'/Users/przenio/python/flappysammy/graphics/plane/red{i}.png').convert_alpha()
 			surf = pygame.image.load(f'graphics/plane/sammy_zombie.png').convert_alpha()
 			scaled_surface = pygame.transform.scale(surf,pygame.math.Vector2(surf.get_size())* scale_factor)
 			self.frames.append(scaled_surface)
-
-	def import_bubble_swim_particles(self):
-		self.bubble_swim_particles = pygame.image.load('graphics/bubbles/bubble.png').convert_alpha()
 
 	def apply_gravity(self,dt):
 		self.direction += self.gravity * dt
@@ -152,12 +148,8 @@ class Bonus(pygame.sprite.Sprite):
 		x = WINDOW_WIDTH + randint(67,127)
 
 		y = WINDOW_HEIGHT - randint(250,650)
-		self.rect = self.image.get_rect(midtop = (x,y))
 		
-			#y = randint(-50,-10)
-			#self.image = pygame.transform.flip(self.image,False,True)
-			#self.rect = self.image.get_rect(midtop = (x,y))
-
+		self.rect = self.image.get_rect(midtop = (x,y))
 		self.pos = pygame.math.Vector2(self.rect.topleft)
 
 		# mask
