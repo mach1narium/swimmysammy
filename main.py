@@ -20,7 +20,6 @@ class Game:
 		#self.particles = pygame.sprite.Group()
 
 		# scale factor
-		#bg_height = pygame.image.load('/Users/przenio/python/flappysammy/graphics/environment/background.png').get_height()
 		bg_height = pygame.image.load('graphics/environment/background.png').get_height()
 
 		self.scale_factor = WINDOW_HEIGHT / bg_height
