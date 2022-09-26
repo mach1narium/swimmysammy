@@ -1,7 +1,7 @@
 import pygame, sys, time, asyncio
 from os import path
 from settings import *
-from sprites import BG, Ground, Plane, Obstacle, ParticleBubble, Bonus
+from sprites import BG, Ground, Sammy, Obstacle, ParticleBubble, Bonus
 
 class Game:
 	def __init__(self):
@@ -27,7 +27,7 @@ class Game:
 		# sprite setup 
 		BG(self.all_sprites,self.scale_factor)
 		Ground([self.all_sprites,self.collision_sprites],self.scale_factor)
-		self.plane = Plane(self.all_sprites,self.scale_factor / 12.0)
+		self.sammy = Sammy(self.all_sprites,self.scale_factor / 12.0)
 		self.particle = ParticleBubble(self.display_surface)
 		self.particle_sammy = ParticleBubble(self.display_surface)
 
@@ -62,18 +62,18 @@ class Game:
 		self.slurp_sound.set_volume(1.9)
 
 	def collisions(self):
-		if pygame.sprite.spritecollide(self.plane,self.collision_sprites,False,pygame.sprite.collide_mask)\
-		or self.plane.rect.top <= 0:
+		if pygame.sprite.spritecollide(self.sammy,self.collision_sprites,False,pygame.sprite.collide_mask)\
+		or self.sammy.rect.top <= 0:
 			for sprite in self.collision_sprites.sprites():
 				if sprite.sprite_type == 'obstacle':
 					print(sprite)
 					sprite.kill()
 					
 			self.active = False
-			self.plane.kill()
+			self.sammy.kill()
 
 	def collisions_bonus(self):
-		if pygame.sprite.spritecollide(self.plane,self.bonus_sprites,False,pygame.sprite.collide_mask):
+		if pygame.sprite.spritecollide(self.sammy,self.bonus_sprites,False,pygame.sprite.collide_mask):
 			for sprite in self.bonus_sprites.sprites():
 				if sprite.sprite_type == 'bonus':
 					self.slurp_sound.play()
@@ -121,7 +121,7 @@ class Game:
 		self.display_surface.blit(fps_surf,fps_rect)
 
 	async def run(self):
-		self.plane.kill()
+		self.sammy.kill()
 		last_time = time.time()
 		while True:
 			
@@ -136,11 +136,11 @@ class Game:
 					sys.exit()
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					if self.active:
-						self.plane.jump()
+						self.sammy.jump()
 						#self.bubble = ParticleBubble(self.all_sprites,self.scale_factor * 0.3)
 					else:
 						#print("Current Working Directory " , os.getcwd())
-						self.plane = Plane(self.all_sprites,self.scale_factor / 9.0)
+						self.sammy = Sammy(self.all_sprites,self.scale_factor / 9.0)
 						self.active = True
 						self.start_offset = pygame.time.get_ticks()
 
@@ -151,7 +151,7 @@ class Game:
 				if event.type == self.particle_timer:
 					self.particle.add_particles()
 				if event.type == self.particle_sammy_timer and self.active:
-					self.particle_sammy.add_jump_particles(int(self.plane.pos.y))
+					self.particle_sammy.add_jump_particles(int(self.sammy.pos.y))
 			
 			
 			# game logic
