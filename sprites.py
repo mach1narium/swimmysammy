@@ -51,7 +51,7 @@ class Ground(pygame.sprite.Sprite):
 class Sammy(pygame.sprite.Sprite):
 	def __init__(self,groups,scale_factor):
 		super().__init__(groups)
-		self.sprite_type = 'plane'
+		self.sprite_type = 'sammy'
 
 		# image 
 		self.import_frames(scale_factor)
