@@ -1,7 +1,8 @@
-import pygame, sys, time, asyncio, scoreunlocked
+import pygame, sys, time, asyncio
 from os import path
 from settings import *
 from sprites import BG, Ground, Sammy, Obstacle, ParticleBubble, Bonus
+import scoreunlocked
 
 class Game:
 	def __init__(self):
