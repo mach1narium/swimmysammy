@@ -1,4 +1,4 @@
-import pygame, sys, time, asyncio
+import pygame, sys, time, asyncio, scoreunlocked
 from os import path
 from settings import *
 from sprites import BG, Ground, Sammy, Obstacle, ParticleBubble, Bonus
@@ -12,6 +12,16 @@ class Game:
 		pygame.display.set_caption('Swimmy Sammy')
 		self.clock = pygame.time.Clock()
 		self.active = False
+		
+		# leaderboard
+		self.leaderboard = False
+		self.player_name = ''
+		self.player_active = False
+		self.client = scoreunlocked.Client()  # instantiating the client
+		self.client.connect('mach1narium', 'swimmysammy')
+		
+		# to get leaderboard from server [returns None if not found or errors occurred]
+		self.client.get_leaderboard()
 
 		# sprite groups
 		self.all_sprites = pygame.sprite.Group()
@@ -66,7 +76,6 @@ class Game:
 		or self.sammy.rect.top <= 0:
 			for sprite in self.collision_sprites.sprites():
 				if sprite.sprite_type == 'obstacle':
-					print(sprite)
 					sprite.kill()
 					
 			self.active = False
@@ -77,7 +86,6 @@ class Game:
 			for sprite in self.bonus_sprites.sprites():
 				if sprite.sprite_type == 'bonus':
 					self.slurp_sound.play()
-					print(sprite)
 					sprite.kill()
 					self.start_offset -= 10000
 
@@ -103,6 +111,7 @@ class Game:
 	def display_high_score(self):
 		if self.score > self.high_score:
 			self.high_score = self.score
+			self.leaderboard = True
 			with open(path.join(self.dir, HS_FILE), 'w') as f:
 				f.write(str(self.high_score))
 	
@@ -119,6 +128,21 @@ class Game:
 		fps_surf = self.font_small.render(self.ver,True,'grey')
 		fps_rect = fps_surf.get_rect(topright = (WINDOW_WIDTH ,y))
 		self.display_surface.blit(fps_surf,fps_rect)
+		
+		def name_input(self):
+		y = WINDOW_HEIGHT - 600
+
+		name_surf = self.font_small.render('Enter Player Name: ' + self.player_name, True, 'grey')
+		name_rect = name_surf.get_rect(midtop=(WINDOW_WIDTH / 2, y))
+		self.display_surface.blit(name_surf, name_rect)
+
+	def display_name(self):
+
+		y = WINDOW_HEIGHT / 50
+
+		name_surf = self.font_small.render('Player: '+ self.player_name,True,'grey')
+		name_rect = name_surf.get_rect(topleft = (WINDOW_WIDTH - 470 ,y))
+		self.display_surface.blit(name_surf,name_rect)
 
 	async def run(self):
 		self.sammy.kill()
@@ -134,7 +158,16 @@ class Game:
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					sys.exit()
-				if event.type == pygame.MOUSEBUTTONDOWN:
+					
+				if event.type == pygame.KEYDOWN and not self.player_active:
+					if event.key == pygame.K_BACKSPACE:
+						self.player_name = self.player_name[:-1]
+					elif event.key == pygame.K_RETURN:
+						self.player_active = True
+					else:
+						self.player_name += event.unicode	
+				
+				if event.type == pygame.MOUSEBUTTONDOWN and self.player_active == True:
 					if self.active:
 						self.sammy.jump()
 						#self.bubble = ParticleBubble(self.all_sprites,self.scale_factor * 0.3)
@@ -162,6 +195,7 @@ class Game:
 			self.display_high_score()
 			self.display_score()
 			self.display_fps()
+			self.display_name()
 			#print(self.clock.get_fps())
 			#print(pygame.time.get_ticks() - self.start_offset)
 
@@ -171,6 +205,12 @@ class Game:
 				self.particle_sammy.emit(dt)
 			else:
 				self.display_surface.blit(self.menu_surf,self.menu_rect)
+				if not self.player_active:
+					self.name_input()
+				if self.leaderboard == True:
+					self.client.post_score(name=self.player_name, score=self.high_score,validation_data='<data to validate score>')
+					self.leaderboard = False	
+			
 
 			pygame.display.update()
 			self.clock.tick(FRAMERATE)
