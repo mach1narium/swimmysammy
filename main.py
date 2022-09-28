@@ -129,7 +129,7 @@ class Game:
 		fps_rect = fps_surf.get_rect(topright = (WINDOW_WIDTH ,y))
 		self.display_surface.blit(fps_surf,fps_rect)
 		
-		def name_input(self):
+	def name_input(self):
 		y = WINDOW_HEIGHT - 600
 
 		name_surf = self.font_small.render('Enter Player Name: ' + self.player_name, True, 'grey')
@@ -137,7 +137,6 @@ class Game:
 		self.display_surface.blit(name_surf, name_rect)
 
 	def display_name(self):
-
 		y = WINDOW_HEIGHT / 50
 
 		name_surf = self.font_small.render('Player: '+ self.player_name,True,'grey')
