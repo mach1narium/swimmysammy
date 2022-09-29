@@ -2,7 +2,7 @@ import pygame, sys, time, asyncio
 from os import path
 from settings import *
 from sprites import BG, Ground, Sammy, Obstacle, ParticleBubble, Bonus
-import scoreunlocked
+#import scoreunlocked
 
 class Game:
 	def __init__(self):
@@ -18,11 +18,11 @@ class Game:
 		self.leaderboard = False
 		self.player_name = ''
 		self.player_active = False
-		self.client = scoreunlocked.Client()  # instantiating the client
-		self.client.connect('mach1narium', 'swimmysammy')
+		#self.client = scoreunlocked.Client()  # instantiating the client
+		#self.client.connect('mach1narium', 'swimmysammy')
 		
 		# to get leaderboard from server [returns None if not found or errors occurred]
-		self.client.get_leaderboard()
+		#self.client.get_leaderboard()
 
 		# sprite groups
 		self.all_sprites = pygame.sprite.Group()
@@ -147,6 +147,7 @@ class Game:
 	async def run(self):
 		self.sammy.kill()
 		last_time = time.time()
+		
 		while True:
 			
 			# delta time
@@ -207,9 +208,10 @@ class Game:
 				self.display_surface.blit(self.menu_surf,self.menu_rect)
 				if not self.player_active:
 					self.name_input()
-				if self.leaderboard == True:
-					self.client.post_score(name=self.player_name, score=self.high_score,validation_data='<data to validate score>')
-					self.leaderboard = False	
+				#Not working in pygame
+				#if self.leaderboard == True:
+					#self.client.post_score(name=self.player_name, score=self.high_score,validation_data='<data to validate score>')
+					#self.leaderboard = False	
 			
 
 			pygame.display.update()
