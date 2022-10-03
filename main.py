@@ -209,9 +209,9 @@ class Game:
 				if not self.player_active:
 					self.name_input()
 				#Not working in pygame
-				#if self.leaderboard == True:
-					#self.client.post_score(name=self.player_name, score=self.high_score,validation_data='<data to validate score>')
-					#self.leaderboard = False	
+				if self.leaderboard == True:
+					self.client.post_score(name=self.player_name, score=self.high_score,validation_data='<data to validate score>')
+					self.leaderboard = False	
 			
 
 			pygame.display.update()
