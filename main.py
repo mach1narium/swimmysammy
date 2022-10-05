@@ -23,7 +23,7 @@ class Game:
 		
 		# to get leaderboard from server [returns None if not found or errors occurred]
 		#self.client.get_leaderboard()
-
+		
 		# sprite groups
 		self.all_sprites = pygame.sprite.Group()
 		self.collision_sprites = pygame.sprite.Group()
@@ -148,8 +148,14 @@ class Game:
 					pygame.quit()
 					sys.exit()
 					
-
-				
+				if event.type == pygame.KEYDOWN and not self.player_active:
+					if event.key == pygame.K_BACKSPACE:
+						self.player_name = self.player_name[:-1]
+					elif event.key == pygame.K_RETURN:
+						self.player_active = True
+					else:
+						self.player_name += event.unicode	
+						
 				if event.type == pygame.MOUSEBUTTONDOWN and self.player_active == True:
 					if self.active:
 						self.sammy.jump()
