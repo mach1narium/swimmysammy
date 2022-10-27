@@ -138,7 +138,35 @@ class Obstacle(pygame.sprite.Sprite):
 			self.kill()
 
 
+class Bonus(pygame.sprite.Sprite):
+	def __init__(self,bonuss,scale_factor):
+		super().__init__(bonuss)
+		self.sprite_type = 'bonus'
 
+		surf = pygame.image.load(f'graphics/bonus/bonus.png').convert_alpha()
+		self.image = pygame.transform.scale(surf,pygame.math.Vector2(surf.get_size()) * scale_factor)
+		
+		x = WINDOW_WIDTH + randint(67,127)
+		y = WINDOW_HEIGHT - randint(250,650)
+		
+		self.rect = self.image.get_rect(midleft = (x,y))
+		self.pos = pygame.math.Vector2(self.rect.topleft)
+
+		# mask
+		self.mask = pygame.mask.from_surface(self.image)
+
+	def rotate(self,rot):
+		self.image = pygame.transform.rotate(self.image,rot)
+
+
+	def update(self,dt):
+		self.pos.x -= 225 * dt
+		self.rect.x = round(self.pos.x)
+		#self.rotate(2)
+		if self.rect.right <= -75:
+			self.kill()
+			
+			
 class ParticleBubble(pygame.sprite.Sprite):
 	def __init__(self,surface):
 		super().__init__()
