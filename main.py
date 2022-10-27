@@ -15,14 +15,14 @@ class Game:
 		self.active = False
 		self.player_active = True
 		
-		"""
+		
 		# leaderboard
 		self.leaderboard = False
 		self.player_name = ''
 		self.player_active = False
 		#self.client = scoreunlocked.Client()  # instantiating the client
 		#self.client.connect('mach1narium', 'swimmysammy')
-		"""
+		
 		
 		# to get leaderboard from server [returns None if not found or errors occurred]
 		#self.client.get_leaderboard()
