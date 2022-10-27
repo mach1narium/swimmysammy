@@ -13,8 +13,6 @@ class Game:
 		pygame.display.set_caption('Swimmy Sammy')
 		self.clock = pygame.time.Clock()
 		self.active = False
-		self.player_active = True
-		
 		
 		# leaderboard
 		self.leaderboard = False
@@ -172,7 +170,7 @@ class Game:
 						self.player_name += event.unicode	
 				"""		
 				
-				if event.type == pygame.MOUSEBUTTONDOWN and self.player_active == True:
+				if event.type == pygame.MOUSEBUTTONDOWN:
 					if self.active:
 						self.sammy.jump()
 						#self.bubble = ParticleBubble(self.all_sprites,self.scale_factor * 0.3)
@@ -212,7 +210,7 @@ class Game:
 				self.display_surface.blit(self.menu_surf,self.menu_rect)
 				"""if not self.player_active:
 					self.name_input()
-				#Not working in pygame
+				
 				if self.leaderboard == True:
 					self.client.post_score(name=self.player_name, score=self.high_score,validation_data='<data to validate score>')
 					self.leaderboard = False"""	
