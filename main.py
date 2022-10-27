@@ -13,13 +13,16 @@ class Game:
 		pygame.display.set_caption('Swimmy Sammy')
 		self.clock = pygame.time.Clock()
 		self.active = False
+		self.player_active = True
 		
+		"""
 		# leaderboard
 		self.leaderboard = False
 		self.player_name = ''
 		self.player_active = False
 		#self.client = scoreunlocked.Client()  # instantiating the client
 		#self.client.connect('mach1narium', 'swimmysammy')
+		"""
 		
 		# to get leaderboard from server [returns None if not found or errors occurred]
 		#self.client.get_leaderboard()
@@ -159,7 +162,7 @@ class Game:
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					sys.exit()
-					
+				"""	
 				if event.type == pygame.KEYDOWN and not self.player_active:
 					if event.key == pygame.K_BACKSPACE:
 						self.player_name = self.player_name[:-1]
@@ -167,6 +170,7 @@ class Game:
 						self.player_active = True
 					else:
 						self.player_name += event.unicode	
+				"""		
 				
 				if event.type == pygame.MOUSEBUTTONDOWN and self.player_active == True:
 					if self.active:
@@ -196,7 +200,7 @@ class Game:
 			self.display_high_score()
 			self.display_score()
 			self.display_fps()
-			self.display_name()
+			#self.display_name()
 			#print(self.clock.get_fps())
 			#print(pygame.time.get_ticks() - self.start_offset)
 
@@ -206,12 +210,12 @@ class Game:
 				self.particle_sammy.emit(dt)
 			else:
 				self.display_surface.blit(self.menu_surf,self.menu_rect)
-				if not self.player_active:
+				"""if not self.player_active:
 					self.name_input()
 				#Not working in pygame
 				if self.leaderboard == True:
 					self.client.post_score(name=self.player_name, score=self.high_score,validation_data='<data to validate score>')
-					self.leaderboard = False	
+					self.leaderboard = False"""	
 			
 
 			pygame.display.update()
